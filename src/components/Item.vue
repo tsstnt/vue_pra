@@ -13,7 +13,7 @@ export default {
   //声明接受属性：属性名/属性值的类型
   props:{
     todo:Object,
-    deleteTodo:Function,
+    // deleteTodo:Function,
     updateTodo:Function
   },
   data(){
@@ -45,7 +45,9 @@ export default {
     },
     deleteItem(){
       if(confirm('Delete?')){
-        this.deleteTodo(this.todo.id)
+        // this.deleteTodo(this.todo.id)
+        //通过事件总线分发事件
+        this.$eventBus.$emit('deleteTodo',this.todo.id)
       }
     }
   }

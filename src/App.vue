@@ -1,9 +1,18 @@
 <template>
   <div class="todo-container">
     <div class="todo-wrap">
-      <Header :addTodo="addTodo" />
+      <!-- <Header :addTodo="addTodo" /> -->
+      <!-- <Header @addTodo="addTodo" />的父组件中给子组件对象绑定自定义事件监听 -->
+      <Header ref="header" />
       <List :todos="todos" :deleteTodo="deleteTodo" :updateTodo="updateTodo"/>
-      <Footer :todos="todos":selectAll="selectAll" :clearAllComplete="clearAllComplete"/>
+      <!-- <Footer :todos="todos":selectAll="selectAll" :clearAllComplete="clearAllComplete"/> -->
+      <Footer>
+        <span slot="center">
+          <span>已完成{{completeSize}}</span> / 全部{{todos.length}}
+        </span> 
+        <input type="checkbox" v-model="isCheckAll" slot="left"/>
+        <button class="btn btn-danger" v-show="completeSize>0" @click="clearAllComplete" slot="right">清除已完成任务</button>
+      </Footer>
     </div>
   </div>
 </template>
@@ -24,7 +33,28 @@ export default {
       ]
     };
   },
+    computed: {
+    completeSize() {
+      return this.todos.reduce((pre, todo) => pre + (todo.complete ? 1 : 0), 0);
+    },
+    isCheckAll: {
+      get(){
+        return this.todos.length === this.completeSize && this.completeSize>0
+      },
+      set(value){
+        this.selectAll(value)
+      }
+    }
+  },
   mounted(){
+    // 组件对象的原型(父)对象就是一个vm对象
+    // console.log('App mounted()', this, new Vue())
+    this.$refs.header.$on('addTodo',this.addTodo)
+    //this.$on('addTodo',this,addTodo)//不可以
+
+    //通过事件总线对象绑定时间监听(deleteTodo)
+    this.$eventBus.$on('deleteTodo',this.deleteTodo)
+    //读取local中保存的todos数据
     setTimeout(() => {
       this.todos = JSON.parse(localStorage.getItem('todos_key') || '[]')
     }, 200);
@@ -37,10 +67,15 @@ export default {
       }
     }
   },
+  //在组件对象死亡之前,解除事件监听
+  // beforeDestroy() {
+  //   this.$eventBus.$off('deleteTodo')
+  // },
 
   methods: {
     //增加
     addTodo(todo) {
+      console.log('addTodoApp');
       this.todos.unshift(todo);
     },
     //删除

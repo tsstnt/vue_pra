@@ -6,6 +6,9 @@ import App from './App.vue'
 
 import './base.css'
 
+//创建一个全局事件总线对象,并保存到Vue的原型对象上(让所有的组件对象都能看到)
+  // Vue.prototype.$globalEventBus = new Vue()
+  Vue.prototype.$eventBus = new Vue()
 new Vue({
   components: {
     App

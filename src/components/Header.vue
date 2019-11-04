@@ -7,10 +7,10 @@
 export default {
   name:'Header',
   props:{
-    addTodo:{
-      type:Function,
-      required:true,
-    }
+    // addTodo:{
+    //   type:Function,
+    //   required:true,
+    // }
   },
   data(){
     return{
@@ -30,7 +30,9 @@ export default {
         title,
       }
       //调用addTodo()来添加todo
-      this.addTodo(todo)
+      // this.addTodo(todo)
+      this.$emit('addTodo',todo)
+      console.log('addTodo Header');
       //清除输入
       this.title = ''
     }

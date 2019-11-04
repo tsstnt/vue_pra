@@ -1,36 +1,38 @@
 <template>
   <div class="todo-footer">
     <label>
-      <input type="checkbox" v-model="isCheckAll" />
+      <!-- <input type="checkbox" v-model="isCheckAll" /> -->
+      <slot name="left"></slot>
     </label>
-    <span>
-      <span>已完成{{ completeSize }}</span> / 全部{{ todos.length }}</span
-    >
-    <button class="btn btn-danger" v-show="completeSize > 0" @click="clearAllComplete">
+      <slot name="center"></slot>
+    <!-- <span>
+      <span>已完成{{ completeSize }}</span> / 全部{{ todos.length }}</span> -->
+    <!-- <button class="btn btn-danger" v-show="completeSize > 0" @click="clearAllComplete"> -->
+      <slot name="right">默认界面</slot>
       清除已完成任务
     </button>
   </div>
 </template>
 <script>
 export default {
-  props: {
-    todos: Array,
-    selectAll: Function,
-    clearAllComplete: Function
-  },
-  computed: {
-    completeSize() {
-      return this.todos.reduce((pre, todo) => pre + (todo.complete ? 1 : 0), 0);
-    },
-    isCheckAll: {
-      get(){
-        return this.todos.length === this.completeSize && this.completeSize>0
-      },
-      set(value){
-        this.selectAll(value)
-      }
-    }
-  },
+  // props: {
+  //   todos: Array,
+  //   selectAll: Function,
+  //   clearAllComplete: Function
+  // },
+  // computed: {
+  //   completeSize() {
+  //     return this.todos.reduce((pre, todo) => pre + (todo.complete ? 1 : 0), 0);
+  //   },
+  //   isCheckAll: {
+  //     get(){
+  //       return this.todos.length === this.completeSize && this.completeSize>0
+  //     },
+  //     set(value){
+  //       this.selectAll(value)
+  //     }
+  //   }
+  // },
 
   name: "Footer"
 };

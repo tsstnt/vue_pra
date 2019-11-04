@@ -1,6 +1,6 @@
 <template>
   <ul class="todo-main">
-    <Item v-for="todo in todos" :key="todo.id" :todo="todo" :deleteTodo="deleteTodo" :updateTodo="updateTodo"/>
+    <Item v-for="todo in todos" :key="todo.id" :todo="todo"  :updateTodo="updateTodo"/>
   </ul>
 </template>
 <script>
@@ -10,7 +10,8 @@ export default {
   //声明接收标签属性：属性名
   //结果：接收到的属性会成为当前对象的属性：this.todos
   //组件对象：相当于一个小的VM对象
-  props:['todos','deleteTodo','updateTodo'],
+  // props:['todos','deleteTodo','updateTodo'],
+  props:['todos','updateTodo'],
   components:{
   Item
   }
