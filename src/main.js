@@ -2,13 +2,12 @@
 入口js
 */
 import Vue from 'vue'
+import VueResource from 'vue-resource'
 import App from './App.vue'
 
-import './base.css'
+//声明使用vue插件
+Vue.use(VueResource)//给所有的组件对象添加了一个属性$http对象,包含发送ajax的请求方法get()/post()
 
-//创建一个全局事件总线对象,并保存到Vue的原型对象上(让所有的组件对象都能看到)
-  // Vue.prototype.$globalEventBus = new Vue()
-  Vue.prototype.$eventBus = new Vue()
 new Vue({
   components: {
     App
