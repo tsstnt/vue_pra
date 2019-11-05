@@ -11,19 +11,32 @@
 </template>
   
 <script type="text/ecmascript-6">
+  import {mapState,mapGetters,mapMutations,mapActions} from 'vuex'
   export default {
     mounted() {
       console.log(this.$store);
     },
-    computed: {
+/*     computed: {
       count(){
         return this.$store.state.count
       },
       evenOrOdd(){
         return this.$store.getters.evenOrOdd
       }
+    }, */
+    computed: {
+      ...mapState(['count']),
+      ...mapGetters(['evenOrOdd'])
     },
+
     methods: {
+      ...mapMutations({
+        increment: 'INCREMENT',
+        decrement: 'DECREMENT'
+      }),
+      ...mapActions(['incrementIfOdd','incrementAsync'])
+    },
+ /*    methods: {
       increment(){
         this.$store.commit('INCREMENT')
       },
@@ -36,7 +49,7 @@
       incrementAsync(){
         this.$store.dispatch('incrementAsync')
       },
-    },
+    }, */
   }
 </script>
   
