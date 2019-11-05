@@ -30,15 +30,16 @@ const mutations = {
 一个包含n个用于间接更新状态数据方法的对象
 */
 const actions = {
-  increment({commit}){
+/*   increment({commit}){//实参是对象,对象包含commit方法
+    // 提交给mutation
     commit('INCREMENT')
   },
   decrement({commit}){
     commit('DECREMENT')
-  },
+  }, */
   //同步action
   incrementIfOdd({commit,state}){//在action中执行逻辑
-    if (state.count$===1) {
+    if (state.count$2===1) {
       //提交给mutation
     commit('INCREMENT')
       
