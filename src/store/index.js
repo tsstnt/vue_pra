@@ -39,7 +39,7 @@ const actions = {
   }, */
   //同步action
   incrementIfOdd({commit,state}){//在action中执行逻辑
-    if (state.count%2===1) {
+    if (state.count %2 === 1) {
       //提交给mutation
     commit('INCREMENT')
       
