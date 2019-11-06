@@ -20,8 +20,8 @@
       search () {
         const searchName = this.searchName.trim()
         if (searchName) {
-          // 分发事件
-          this.$bus.$emit('search', searchName)
+          // 触发发请求的异步action执行
+          this.$store.dispatch('searchAsync',searchName)
         }
       }
     }

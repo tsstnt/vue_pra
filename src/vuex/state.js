@@ -3,6 +3,8 @@
 */
 
 export default{
-  xxx:1,
-  yyy:{}
+    firstView: true,
+    loading: false,
+    users: [],
+    errorMsg: ''
 }
